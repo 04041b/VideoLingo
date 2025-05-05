@@ -6,9 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG PYTHON_VERSION=3.10
 
 # Change software sources and install basic tools and system dependencies
-RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-    sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-    apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common git curl sudo ffmpeg fonts-noto wget \
     && add-apt-repository ppa:deadsnakes/ppa \
     && apt-get update -y \
@@ -36,7 +34,7 @@ RUN pip install torch==2.0.0 torchaudio==2.0.0 --index-url https://download.pyto
 RUN rm -rf .git
 
 # Upgrade pip and install basic dependencies
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
 
 # Install dependencies
 COPY requirements.txt .
